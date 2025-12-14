@@ -1,0 +1,38 @@
+direction: right
+
+# --- Nodes ---
+step1: Step 1: CT Scan Uploaded {
+  shape: rectangle
+}
+
+# Group Step 2 to visually show parallel execution
+step2: Step 2: Parallel Split {
+  style: {fill: transparent; stroke-dash: 3}
+  
+  algo1: Algo 1: The Sprint\n(Critical Bleeds)
+  algo2: Algo 2: The Sweep\n(Safety Check)
+}
+
+algo3: Algo 3: The Expert\n(Specific Review)
+
+# Results
+priority: **TOP OF WORKLIST**\n(Priority) {
+  style: {stroke-width: 4; fill: white}
+}
+discharge: Fast-Track\nDischarge
+standard: Standard Queue
+
+# --- Connections ---
+step1 -> step2.algo1
+step1 -> step2.algo2
+
+# Algo 1 Logic
+step2.algo1 -> priority: Found Critical
+
+# Algo 2 Logic
+step2.algo2 -> discharge: Nothing
+step2.algo2 -> algo3: Suspicious
+
+# Algo 3 Logic
+algo3 -> priority: Real Bleed
+algo3 -> standard: Mimic
